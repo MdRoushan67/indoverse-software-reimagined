@@ -21,8 +21,8 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import logo from '@/assets/indoverse-logo.png';
 import startupOffice from '@/assets/startup-office.jpg';
-import codeFlow from '@/assets/code-flow.jpg';
 import aiNetwork from '@/assets/ai-network-bg.jpg';
+import logoAnimated from '@/assets/indoverse-logo-animated.mp4';
 
 const Index = () => {
   const { toast } = useToast();
@@ -207,11 +207,19 @@ const Index = () => {
 
       {/* Problem/Solution Section */}
       <section className="relative py-24 overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0 opacity-5">
-          <img src={codeFlow} alt="" className="w-full h-full object-cover" />
+        {/* Animated logo background */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-[600px] h-[600px] md:w-[800px] md:h-[800px] object-contain opacity-10"
+          >
+            <source src={logoAnimated} type="video/mp4" />
+          </video>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
         
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="grid lg:grid-cols-3 gap-8 items-center">
