@@ -13,14 +13,12 @@ import TechNewsTicker from '@/components/TechNewsTicker';
 import CodeRunnerGame from '@/components/CodeRunnerGame';
 import NewsletterSection from '@/components/NewsletterSection';
 import HeroVideoBackground from '@/components/HeroVideoBackground';
-import ImageSlide from '@/components/ImageSlide';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import logo from '@/assets/indoverse-logo.png';
-import startupOffice from '@/assets/startup-office.jpg';
 import aiNetwork from '@/assets/ai-network-bg.jpg';
 import logoAnimated from '@/assets/indoverse-logo-animated.mp4';
 
@@ -207,39 +205,28 @@ const Index = () => {
 
       {/* Problem/Solution Section */}
       <section className="relative py-24 overflow-hidden">
-        {/* Animated logo background */}
+        {/* Enhanced animated logo background with glow */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-[600px] h-[600px] md:w-[800px] md:h-[800px] object-contain opacity-10"
-          >
-            <source src={logoAnimated} type="video/mp4" />
-          </video>
+          <div className="relative">
+            {/* Glow effect behind video */}
+            <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full scale-150" />
+            <div className="absolute inset-0 bg-accent/15 blur-[80px] rounded-full scale-125 animate-pulse" />
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="relative w-[500px] h-[500px] md:w-[700px] md:h-[700px] object-contain opacity-20"
+              style={{ filter: 'drop-shadow(0 0 40px hsl(var(--primary) / 0.5))' }}
+            >
+              <source src={logoAnimated} type="video/mp4" />
+            </video>
+          </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
         
         <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="grid lg:grid-cols-3 gap-8 items-center">
-            {/* Featured image */}
-            <motion.div
-              className="hidden lg:block"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <ImageSlide 
-                src={startupOffice} 
-                alt="Modern tech office" 
-                className="h-[500px]"
-                overlayOpacity={0.5}
-              />
-            </motion.div>
-
-            <div className="lg:col-span-2 grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               <GlassCard className="relative overflow-hidden" delay={0.1}>
                 <div className="absolute top-0 right-0 w-32 h-32 bg-destructive/20 rounded-full blur-3xl" />
                 <h3 className="text-sm font-semibold text-destructive uppercase tracking-wider mb-4">
@@ -295,7 +282,6 @@ const Index = () => {
                   </li>
                 </ul>
               </GlassCard>
-            </div>
           </div>
         </div>
       </section>
