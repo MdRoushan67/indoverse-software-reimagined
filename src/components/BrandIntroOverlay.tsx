@@ -66,7 +66,12 @@ const BrandIntroOverlay = ({ onComplete }: BrandIntroOverlayProps) => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black"
+          className="fixed inset-0 z-[100] bg-black overflow-hidden"
+          style={{ 
+            width: '100vw', 
+            height: '100vh',
+            minHeight: '100dvh' // Dynamic viewport height for mobile
+          }}
         >
           <motion.div
             initial={{ 
@@ -90,14 +95,24 @@ const BrandIntroOverlay = ({ onComplete }: BrandIntroOverlayProps) => {
               duration: 1.2, 
               ease: [0.25, 0.46, 0.45, 0.94] 
             }}
-            className="w-screen h-screen flex items-center justify-center"
+            className="absolute inset-0"
+            style={{
+              width: '100%',
+              height: '100%'
+            }}
           >
             <video
               ref={videoRef}
               onEnded={handleVideoEnd}
               playsInline
               preload="auto"
-              className="w-full h-full object-contain"
+              className="absolute inset-0 w-full h-full"
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center center',
+                minWidth: '100%',
+                minHeight: '100%'
+              }}
             >
               <source src={brandIntroVideo} type="video/mp4" />
             </video>
