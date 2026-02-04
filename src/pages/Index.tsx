@@ -26,10 +26,7 @@ const Index = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [introComplete, setIntroComplete] = useState(() => {
-    // Check if intro already played to set initial state correctly
-    return sessionStorage.getItem('indoverse-intro-played') === 'true';
-  });
+  const [introComplete, setIntroComplete] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
