@@ -13,7 +13,6 @@ import TechNewsTicker from '@/components/TechNewsTicker';
 import CodeRunnerGame from '@/components/CodeRunnerGame';
 import NewsletterSection from '@/components/NewsletterSection';
 import HeroVideoBackground from '@/components/HeroVideoBackground';
-import BrandIntroOverlay from '@/components/BrandIntroOverlay';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
@@ -22,11 +21,14 @@ import { supabase } from '@/integrations/supabase/client';
 import logo from '@/assets/indoverse-logo.png';
 import aiNetwork from '@/assets/ai-network-bg.jpg';
 
-const Index = () => {
+interface IndexProps {
+  introComplete?: boolean;
+}
+
+const Index = ({ introComplete = true }: IndexProps) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [introComplete, setIntroComplete] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -98,9 +100,6 @@ const Index = () => {
 
   return (
     <div className="relative">
-      {/* Brand Intro Overlay - plays once per session */}
-      <BrandIntroOverlay onComplete={() => setIntroComplete(true)} />
-
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         {/* Video Background */}
