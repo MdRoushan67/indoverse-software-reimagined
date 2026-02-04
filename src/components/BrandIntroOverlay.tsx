@@ -10,25 +10,23 @@ const BrandIntroOverlay = ({ onComplete }: BrandIntroOverlayProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVisible, setIsVisible] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [hasPlayed, setHasPlayed] = useState(false);
 
   useEffect(() => {
-    // Check if intro has already played in this session
-    const played = sessionStorage.getItem('indoverse-intro-played');
-    if (played) {
-      setHasPlayed(true);
-      setIsVisible(false);
-      onComplete();
-      return;
-    }
-
-    // Play the video
+    // Play video on every page load/refresh
     const video = videoRef.current;
     if (video) {
-      video.play().catch((err) => {
-        console.log('Autoplay prevented:', err);
-        // If autoplay fails (browser policy), skip intro
-        handleVideoEnd();
+      // Reset video to start
+      video.currentTime = 0;
+      
+      // Try to play with sound first
+      video.muted = false;
+      video.play().catch(() => {
+        // If autoplay with sound fails (browser policy), try muted
+        video.muted = true;
+        video.play().catch(() => {
+          // If even muted autoplay fails, skip intro
+          handleVideoEnd();
+        });
       });
     }
   }, []);
@@ -38,14 +36,12 @@ const BrandIntroOverlay = ({ onComplete }: BrandIntroOverlayProps) => {
     
     // After shrink animation completes, hide overlay
     setTimeout(() => {
-      sessionStorage.setItem('indoverse-intro-played', 'true');
       setIsVisible(false);
       onComplete();
     }, 1200);
   };
 
-  // Don't render if already played
-  if (hasPlayed || !isVisible) {
+  if (!isVisible) {
     return null;
   }
 
@@ -55,9 +51,8 @@ const BrandIntroOverlay = ({ onComplete }: BrandIntroOverlayProps) => {
     const vh = window.innerHeight;
     
     // Target: header logo position (approximately 24px from left, 20px from top for the center)
-    // We need to calculate offset from center of screen
-    const targetX = -(vw / 2) + 60; // Move to left side + some padding for logo center
-    const targetY = -(vh / 2) + 40; // Move to top + header height center
+    const targetX = -(vw / 2) + 60;
+    const targetY = -(vh / 2) + 40;
     
     return { x: targetX, y: targetY };
   };
@@ -71,7 +66,7 @@ const BrandIntroOverlay = ({ onComplete }: BrandIntroOverlayProps) => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-background"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black"
         >
           <motion.div
             initial={{ 
@@ -101,11 +96,8 @@ const BrandIntroOverlay = ({ onComplete }: BrandIntroOverlayProps) => {
               ref={videoRef}
               onEnded={handleVideoEnd}
               playsInline
-              className="w-full h-full object-cover"
-              style={{ 
-                maxWidth: '100vw', 
-                maxHeight: '100vh' 
-              }}
+              preload="auto"
+              className="w-full h-full object-contain"
             >
               <source src={brandIntroVideo} type="video/mp4" />
             </video>
