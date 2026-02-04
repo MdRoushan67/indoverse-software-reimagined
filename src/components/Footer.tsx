@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Linkedin, Twitter, Github, ArrowUpRight } from 'lucide-react';
 import logo from '@/assets/indoverse-logo.png';
@@ -6,20 +5,27 @@ import logo from '@/assets/indoverse-logo.png';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const footerLinks = {
-    company: [
-      { name: 'About', path: '/about' },
-      { name: 'Services', path: '/services' },
-      { name: 'Portfolio', path: '/portfolio' },
-      { name: 'Contact', path: '/contact' },
-    ],
-    products: [
-      { name: 'Techgram', href: 'https://techgramedu.in', external: true },
-      { name: 'Gig-lo', href: 'https://giglo.in', external: true },
-      { name: 'Ownclothing', href: 'https://ownclothing.in', external: true },
-      { name: 'Ownclothing AI', href: 'https://ownclothing.in/ownclothingai', external: true },
-    ],
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
+
+  const footerLinks = [
+    { name: 'Home', id: 'home' },
+    { name: 'About', id: 'about' },
+    { name: 'Services', id: 'services' },
+    { name: 'Portfolio', id: 'portfolio' },
+    { name: 'Contact', id: 'contact' },
+  ];
+
+  const products = [
+    { name: 'Techgram', href: 'https://techgramedu.in' },
+    { name: 'Gig-lo', href: 'https://giglo.in' },
+    { name: 'Ownclothing', href: 'https://ownclothing.in' },
+    { name: 'Ownclothing AI', href: 'https://ownclothing.in/ownclothingai' },
+  ];
 
   const socialLinks = [
     { icon: Twitter, href: 'https://twitter.com/indoverselabs', label: 'Twitter' },
@@ -29,21 +35,19 @@ const Footer = () => {
 
   return (
     <footer className="relative bg-card/50 border-t border-border/50">
-      {/* Gradient overlay */}
       <div className="absolute inset-0 bg-mesh-gradient opacity-30 pointer-events-none" />
 
       <div className="container mx-auto px-4 md:px-6 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center gap-3 mb-6">
+            <button onClick={() => scrollToSection('home')} className="flex items-center gap-3 mb-6">
               <img src={logo} alt="Indoverse Labs" className="h-12 w-auto" />
               <span className="text-xl font-bold gradient-text">Indoverse Labs</span>
-            </Link>
+            </button>
             <p className="text-muted-foreground mb-6 max-w-md">
               Building the future, one line of code at a time. We're not just a dev shop—we're 
-              your AI-powered partner in disrupting industries and creating software that actually 
-              ships on time. Wild concept, we know.
+              your AI-powered partner in disrupting industries.
             </p>
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
@@ -62,32 +66,32 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Company Links */}
+          {/* Navigation */}
           <div>
             <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-6">
-              Company
+              Navigation
             </h4>
             <ul className="space-y-4">
-              {footerLinks.company.map((link) => (
-                <li key={link.path}>
-                  <Link
-                    to={link.path}
+              {footerLinks.map((link) => (
+                <li key={link.id}>
+                  <button
+                    onClick={() => scrollToSection(link.id)}
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.name}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Products Links */}
+          {/* Products */}
           <div>
             <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-6">
               Products
             </h4>
             <ul className="space-y-4">
-              {footerLinks.products.map((link) => (
+              {products.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
@@ -98,7 +102,7 @@ const Footer = () => {
                     {link.name}
                     <ArrowUpRight 
                       size={14} 
-                      className="opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" 
+                      className="opacity-0 group-hover:opacity-100 transition-opacity" 
                     />
                   </a>
                 </li>
@@ -107,7 +111,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Contact Info */}
+        {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex flex-col sm:flex-row items-center gap-6 text-sm text-muted-foreground">
             <a 
@@ -124,7 +128,7 @@ const Footer = () => {
           </div>
 
           <p className="text-sm text-muted-foreground">
-            © {currentYear} Indoverse Labs. All rights reserved. Built different.
+            © {currentYear} Indoverse Labs. Built different.
           </p>
         </div>
       </div>

@@ -1,35 +1,52 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import logo from '@/assets/indoverse-logo.png';
 
 const navLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'About', path: '/about' },
-  { name: 'Services', path: '/services' },
-  { name: 'Portfolio', path: '/portfolio' },
-  { name: 'Contact', path: '/contact' },
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Services', href: '#services' },
+  { name: 'Portfolio', href: '#portfolio' },
+  { name: 'Contact', href: '#contact' },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+
+      // Detect active section
+      const sections = navLinks.map(link => link.href.replace('#', ''));
+      for (const section of sections.reverse()) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
+  const scrollToSection = (href: string) => {
+    const element = document.getElementById(href.replace('#', ''));
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
     setIsOpen(false);
-  }, [location]);
+  };
 
   return (
     <>
@@ -47,7 +64,7 @@ const Navbar = () => {
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
+            <button onClick={() => scrollToSection('#home')} className="flex items-center gap-3 group">
               <motion.img
                 src={logo}
                 alt="Indoverse Labs"
@@ -58,28 +75,28 @@ const Navbar = () => {
               <span className="hidden sm:block text-lg md:text-xl font-bold gradient-text">
                 Indoverse Labs
               </span>
-            </Link>
+            </button>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-1">
               {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
+                <button
+                  key={link.href}
+                  onClick={() => scrollToSection(link.href)}
                   className={cn(
                     'nav-link px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors',
-                    location.pathname === link.path && 'active text-primary'
+                    activeSection === link.href.replace('#', '') && 'active text-primary'
                   )}
                 >
                   {link.name}
-                </Link>
+                </button>
               ))}
-              <Link
-                to="/contact"
+              <button
+                onClick={() => scrollToSection('#contact')}
                 className="ml-4 px-6 py-2.5 bg-primary text-primary-foreground rounded-full text-sm font-semibold btn-glow hover:bg-primary/90 transition-all"
               >
                 Let's Build
-              </Link>
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -116,22 +133,22 @@ const Navbar = () => {
                 <div className="flex flex-col gap-2">
                   {navLinks.map((link, index) => (
                     <motion.div
-                      key={link.path}
+                      key={link.href}
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
                     >
-                      <Link
-                        to={link.path}
+                      <button
+                        onClick={() => scrollToSection(link.href)}
                         className={cn(
-                          'block px-4 py-4 text-lg font-medium rounded-xl transition-colors',
-                          location.pathname === link.path
+                          'block w-full text-left px-4 py-4 text-lg font-medium rounded-xl transition-colors',
+                          activeSection === link.href.replace('#', '')
                             ? 'bg-primary/10 text-primary'
                             : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
                         )}
                       >
                         {link.name}
-                      </Link>
+                      </button>
                     </motion.div>
                   ))}
                 </div>
@@ -142,12 +159,12 @@ const Navbar = () => {
                   transition={{ delay: 0.5 }}
                   className="mt-8"
                 >
-                  <Link
-                    to="/contact"
+                  <button
+                    onClick={() => scrollToSection('#contact')}
                     className="block w-full py-4 bg-primary text-primary-foreground text-center rounded-xl font-semibold btn-glow"
                   >
                     Let's Build Together
-                  </Link>
+                  </button>
                 </motion.div>
 
                 <div className="mt-auto pb-8">
