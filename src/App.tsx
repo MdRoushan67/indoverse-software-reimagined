@@ -5,9 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ParticleNetwork from "@/components/ParticleNetwork";
-import FloatingOrbs from "@/components/FloatingOrbs";
+import AuroraBackground from "@/components/AuroraBackground";
 import ScrollProgress from "@/components/ScrollProgress";
+import AIChatbot from "@/components/AIChatbot";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -19,10 +19,9 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="relative min-h-screen animated-gradient-bg">
-          {/* Background effects */}
-          <ParticleNetwork />
-          <FloatingOrbs />
+        <div className="relative min-h-screen">
+          {/* Premium Background effects */}
+          <AuroraBackground />
           <ScrollProgress />
           
           {/* Navigation */}
@@ -38,6 +37,9 @@ const App = () => (
           
           {/* Footer */}
           <Footer />
+
+          {/* AI Chatbot */}
+          <AIChatbot />
         </div>
       </BrowserRouter>
     </TooltipProvider>
