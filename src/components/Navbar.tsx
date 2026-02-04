@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -7,9 +6,9 @@ import logo from '@/assets/indoverse-logo.png';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
   { name: 'Services', href: '#services' },
-  { name: 'Portfolio', href: '#portfolio' },
+  { name: 'Products', href: '#products' },
+  { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -72,7 +71,7 @@ const Navbar = () => {
                 whileHover={{ rotate: [0, -5, 5, 0] }}
                 transition={{ duration: 0.5 }}
               />
-              <span className="hidden sm:block text-lg md:text-xl font-bold gradient-text">
+              <span className="hidden sm:block text-lg md:text-xl font-display font-bold text-foreground">
                 Indoverse Labs
               </span>
             </button>

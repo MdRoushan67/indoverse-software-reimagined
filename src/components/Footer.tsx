@@ -14,9 +14,9 @@ const Footer = () => {
 
   const footerLinks = [
     { name: 'Home', id: 'home' },
-    { name: 'About', id: 'about' },
     { name: 'Services', id: 'services' },
-    { name: 'Portfolio', id: 'portfolio' },
+    { name: 'Products', id: 'products' },
+    { name: 'About', id: 'about' },
     { name: 'Contact', id: 'contact' },
   ];
 
@@ -43,7 +43,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <button onClick={() => scrollToSection('home')} className="flex items-center gap-3 mb-6">
               <img src={logo} alt="Indoverse Labs" className="h-12 w-auto" />
-              <span className="text-xl font-bold gradient-text">Indoverse Labs</span>
+              <span className="text-xl font-display font-bold text-foreground">Indoverse Labs</span>
             </button>
             <p className="text-muted-foreground mb-6 max-w-md">
               Building the future, one line of code at a time. We're not just a dev shop—we're 
