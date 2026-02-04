@@ -4,9 +4,10 @@ import brandIntroVideo from '@/assets/brand-intro.mp4';
 
 interface BrandIntroOverlayProps {
   onComplete: () => void;
+  onAnimationStart?: () => void;
 }
 
-const BrandIntroOverlay = ({ onComplete }: BrandIntroOverlayProps) => {
+const BrandIntroOverlay = ({ onComplete, onAnimationStart }: BrandIntroOverlayProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVisible, setIsVisible] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -40,12 +41,15 @@ const BrandIntroOverlay = ({ onComplete }: BrandIntroOverlayProps) => {
   }, []);
 
   const handleVideoEnd = () => {
+    // Trigger header animation immediately when video ends
+    onAnimationStart?.();
     setIsAnimating(true);
     
+    // Faster transition - hide overlay quickly
     setTimeout(() => {
       setIsVisible(false);
       onComplete();
-    }, 1200);
+    }, 800);
   };
 
   // Don't render on mobile or after animation completes
@@ -58,7 +62,7 @@ const BrandIntroOverlay = ({ onComplete }: BrandIntroOverlayProps) => {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     
-    const targetX = -(vw / 2) + 60;
+    const targetX = -(vw / 2) + 80;
     const targetY = -(vh / 2) + 40;
     
     return { x: targetX, y: targetY };
@@ -71,13 +75,13 @@ const BrandIntroOverlay = ({ onComplete }: BrandIntroOverlayProps) => {
       {isVisible && (
         <motion.div
           initial={{ opacity: 1 }}
+          animate={{ opacity: isAnimating ? 0 : 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center"
+          transition={{ duration: 0.5 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black"
           style={{ 
             width: '100vw', 
-            height: '100vh',
-            backgroundColor: 'hsl(221, 83%, 53%)' // Blue background
+            height: '100vh'
           }}
         >
           <motion.div
@@ -88,7 +92,7 @@ const BrandIntroOverlay = ({ onComplete }: BrandIntroOverlayProps) => {
               opacity: 1 
             }}
             animate={isAnimating ? { 
-              scale: 0.05,
+              scale: 0.04,
               x: targetPos.x,
               y: targetPos.y,
               opacity: 0,
@@ -99,7 +103,7 @@ const BrandIntroOverlay = ({ onComplete }: BrandIntroOverlayProps) => {
               opacity: 1 
             }}
             transition={{ 
-              duration: 1.2, 
+              duration: 0.8, 
               ease: [0.25, 0.46, 0.45, 0.94] 
             }}
             className="w-full h-full flex items-center justify-center"
