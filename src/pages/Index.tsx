@@ -12,12 +12,17 @@ import IndoverseProducts from '@/components/IndoverseProducts';
 import TechNewsTicker from '@/components/TechNewsTicker';
 import CodeRunnerGame from '@/components/CodeRunnerGame';
 import NewsletterSection from '@/components/NewsletterSection';
+import HeroVideoBackground from '@/components/HeroVideoBackground';
+import ImageSlide from '@/components/ImageSlide';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import logo from '@/assets/indoverse-logo.png';
+import startupOffice from '@/assets/startup-office.jpg';
+import codeFlow from '@/assets/code-flow.jpg';
+import aiNetwork from '@/assets/ai-network-bg.jpg';
 
 const Index = () => {
   const { toast } = useToast();
@@ -96,6 +101,9 @@ const Index = () => {
     <div className="relative">
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        {/* Video Background */}
+        <HeroVideoBackground />
+        
         <div className="container mx-auto px-4 md:px-6 py-20 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
             {/* Logo branding */}
@@ -199,63 +207,87 @@ const Index = () => {
 
       {/* Problem/Solution Section */}
       <section className="relative py-24 overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <GlassCard className="relative overflow-hidden" delay={0.1}>
-              <div className="absolute top-0 right-0 w-32 h-32 bg-destructive/20 rounded-full blur-3xl" />
-              <h3 className="text-sm font-semibold text-destructive uppercase tracking-wider mb-4">
-                The Old Way 💀
-              </h3>
-              <h2 className="text-2xl md:text-3xl font-display font-bold mb-6 text-foreground">
-                Traditional Dev Agencies Be Like...
-              </h2>
-              <ul className="space-y-4 text-muted-foreground">
-                <li className="flex items-start gap-3">
-                  <span className="text-destructive mt-1">✗</span>
-                  6-12 months development cycles (in 2024, seriously?)
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-destructive mt-1">✗</span>
-                  Budget that grows faster than your feature list
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-destructive mt-1">✗</span>
-                  "We'll get back to you" (they never do)
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-destructive mt-1">✗</span>
-                  Tech debt that haunts you for years
-                </li>
-              </ul>
-            </GlassCard>
+        {/* Background image */}
+        <div className="absolute inset-0 opacity-5">
+          <img src={codeFlow} alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+        
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
+          <div className="grid lg:grid-cols-3 gap-8 items-center">
+            {/* Featured image */}
+            <motion.div
+              className="hidden lg:block"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <ImageSlide 
+                src={startupOffice} 
+                alt="Modern tech office" 
+                className="h-[500px]"
+                overlayOpacity={0.5}
+              />
+            </motion.div>
 
-            <GlassCard className="relative overflow-hidden" glow="primary" delay={0.3}>
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl" />
-              <h3 className="text-sm font-semibold text-primary uppercase tracking-wider mb-4">
-                The Indoverse Way 🚀
-              </h3>
-              <h2 className="text-2xl md:text-3xl font-display font-bold mb-6 text-foreground">
-                We Actually Deliver
-              </h2>
-              <ul className="space-y-4 text-muted-foreground">
-                <li className="flex items-start gap-3">
-                  <span className="text-primary mt-1">✓</span>
-                  Days to weeks, not months. We're built different.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-primary mt-1">✓</span>
-                  Transparent pricing that doesn't need a therapist
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-primary mt-1">✓</span>
-                  AI-powered development = faster + smarter
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-primary mt-1">✓</span>
-                  Clean, scalable code (we sleep at night)
-                </li>
-              </ul>
-            </GlassCard>
+            <div className="lg:col-span-2 grid md:grid-cols-2 gap-8">
+              <GlassCard className="relative overflow-hidden" delay={0.1}>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-destructive/20 rounded-full blur-3xl" />
+                <h3 className="text-sm font-semibold text-destructive uppercase tracking-wider mb-4">
+                  The Old Way 💀
+                </h3>
+                <h2 className="text-2xl md:text-3xl font-display font-bold mb-6 text-foreground">
+                  Traditional Dev Agencies Be Like...
+                </h2>
+                <ul className="space-y-4 text-muted-foreground">
+                  <li className="flex items-start gap-3">
+                    <span className="text-destructive mt-1">✗</span>
+                    6-12 months development cycles (in 2024, seriously?)
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-destructive mt-1">✗</span>
+                    Budget that grows faster than your feature list
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-destructive mt-1">✗</span>
+                    "We'll get back to you" (they never do)
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-destructive mt-1">✗</span>
+                    Tech debt that haunts you for years
+                  </li>
+                </ul>
+              </GlassCard>
+
+              <GlassCard className="relative overflow-hidden" glow="primary" delay={0.3}>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl" />
+                <h3 className="text-sm font-semibold text-primary uppercase tracking-wider mb-4">
+                  The Indoverse Way 🚀
+                </h3>
+                <h2 className="text-2xl md:text-3xl font-display font-bold mb-6 text-foreground">
+                  We Actually Deliver
+                </h2>
+                <ul className="space-y-4 text-muted-foreground">
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary mt-1">✓</span>
+                    Days to weeks, not months. We're built different.
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary mt-1">✓</span>
+                    Transparent pricing that doesn't need a therapist
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary mt-1">✓</span>
+                    AI-powered development = faster + smarter
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary mt-1">✓</span>
+                    Clean, scalable code (we sleep at night)
+                  </li>
+                </ul>
+              </GlassCard>
+            </div>
           </div>
         </div>
       </section>
@@ -299,7 +331,12 @@ const Index = () => {
 
       {/* About Section (Simplified) */}
       <section id="about" className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent" />
+        {/* Background image */}
+        <div className="absolute inset-0 opacity-10">
+          <img src={aiNetwork} alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
+        
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
