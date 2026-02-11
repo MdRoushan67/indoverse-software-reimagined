@@ -1,4 +1,4 @@
-import heroBg from '@/assets/hero-bg.gif';
+import heroVideo from '@/assets/hero-bg-video.mp4';
 
 interface HeroVideoBackgroundProps {
   className?: string;
@@ -7,12 +7,16 @@ interface HeroVideoBackgroundProps {
 const HeroVideoBackground = ({ className = '' }: HeroVideoBackgroundProps) => {
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
-      {/* Animated GIF background - object-contain to preserve quality */}
-      <img
-        src={heroBg}
-        alt=""
+      <video
         className="absolute inset-0 w-full h-full object-contain bg-background"
-      />
+        muted
+        loop
+        playsInline
+        autoPlay
+        preload="auto"
+      >
+        <source src={heroVideo} type="video/mp4" />
+      </video>
 
       {/* Overlay gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
