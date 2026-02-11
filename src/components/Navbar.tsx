@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import logo from '@/assets/indoverse-logo-animated.gif';
+import logo from '@/assets/indoverse-logo.png';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -72,9 +72,14 @@ const Navbar = () => {
                 whileHover={{ rotate: [0, -5, 5, 0] }}
                 transition={{ duration: 0.5 }}
               />
-              <span className="hidden sm:block text-lg md:text-xl font-display font-bold text-foreground">
-                Indoverse Labs
-              </span>
+              <div className="hidden sm:flex flex-col">
+                <span className="text-lg md:text-xl font-display font-bold text-foreground leading-tight">
+                  Indoverse Labs
+                </span>
+                <span className="text-[10px] md:text-xs text-muted-foreground font-medium tracking-wider">
+                  Design, Deploy, Disrupt!
+                </span>
+              </div>
             </button>
 
             {/* Desktop Navigation */}
