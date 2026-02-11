@@ -104,36 +104,23 @@ const Index = () => {
         <div className="container mx-auto px-4 md:px-6 py-20 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
             {/* Logo branding */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="flex justify-center mb-8"
-            >
+            <div className="flex justify-center mb-8">
               <img 
                 src={logo} 
                 alt="Indoverse Labs" 
                 className="h-16 md:h-20 w-auto"
               />
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+            <div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium mb-8"
             >
               <Zap size={16} className="animate-pulse" />
               AI-Powered Development
               <ChevronRight size={16} />
-            </motion.div>
+            </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6 text-foreground"
-            >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6 text-foreground">
               Still waiting{' '}
               <span className="text-muted-foreground">6 months</span>{' '}
               for your software?
@@ -146,22 +133,16 @@ const Index = () => {
                   pauseDuration={2500}
                 />
               </span>
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+            <p
               className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10"
             >
               We build what others quote months for—in <span className="text-primary font-semibold">days</span>. 
               AI-powered SaaS development for B2B, D2C, and anyone crazy enough to dream big.
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+            <div
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <button
@@ -178,13 +159,12 @@ const Index = () => {
                 See Our Work
                 <Rocket size={20} />
               </button>
-            </motion.div>
+            </div>
           </div>
 
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
             className="absolute bottom-10 left-1/2 -translate-x-1/2"
           >
             <motion.div

@@ -51,7 +51,7 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
+        initial={{ y: 0 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={cn(
