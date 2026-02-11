@@ -101,19 +101,29 @@ const Index = () => {
         <HeroVideoBackground />
         
         <div className="container mx-auto px-4 md:px-6 py-20 relative z-10">
-
-
-
-          <div className="max-w-5xl mx-auto text-center">
-            <div
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.2 }}
+            className="max-w-5xl mx-auto text-center"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium mb-8"
             >
               <Zap size={16} className="animate-pulse" />
               AI-Powered Development
               <ChevronRight size={16} />
-            </div>
+            </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6 text-foreground">
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6 text-foreground"
+            >
               Still waiting{' '}
               <span className="text-muted-foreground">6 months</span>{' '}
               for your software?
@@ -126,16 +136,22 @@ const Index = () => {
                   pauseDuration={2500}
                 />
               </span>
-            </h1>
+            </motion.h1>
 
-            <p
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
               className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10"
             >
               We build what others quote months for—in <span className="text-primary font-semibold">days</span>. 
               AI-powered SaaS development for B2B, D2C, and anyone crazy enough to dream big.
-            </p>
+            </motion.p>
 
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <button
@@ -152,8 +168,8 @@ const Index = () => {
                 See Our Work
                 <Rocket size={20} />
               </button>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 1 }}
