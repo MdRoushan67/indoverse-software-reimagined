@@ -12,19 +12,11 @@ const navLinks = [
   { name: 'Contact', href: '#contact' },
 ];
 
-interface NavbarProps {
-  showLogoAnimation?: boolean;
-}
-
-const Navbar = ({ showLogoAnimation = false }: NavbarProps) => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const [logoRevealed, setLogoRevealed] = useState(!showLogoAnimation);
-  const [textRevealed, setTextRevealed] = useState(!showLogoAnimation);
-  const [displayedText, setDisplayedText] = useState(!showLogoAnimation ? 'Indoverse Labs' : '');
 
-  const brandName = 'Indoverse Labs';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,29 +39,6 @@ const Navbar = ({ showLogoAnimation = false }: NavbarProps) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Handle logo animation when intro ends
-  useEffect(() => {
-    if (showLogoAnimation && !logoRevealed) {
-      // Start logo reveal
-      setLogoRevealed(true);
-      
-      // Start typewriter effect after logo appears
-      setTimeout(() => {
-        setTextRevealed(true);
-      }, 400);
-    }
-  }, [showLogoAnimation, logoRevealed]);
-
-  // Typewriter effect for brand name
-  useEffect(() => {
-    if (textRevealed && displayedText.length < brandName.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText(brandName.slice(0, displayedText.length + 1));
-      }, 80);
-      return () => clearTimeout(timeout);
-    }
-  }, [textRevealed, displayedText]);
 
   const scrollToSection = (href: string) => {
     const element = document.getElementById(href.replace('#', ''));
@@ -96,34 +65,16 @@ const Navbar = ({ showLogoAnimation = false }: NavbarProps) => {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <button onClick={() => scrollToSection('#home')} className="flex items-center gap-3 group">
-              <motion.div
-                initial={showLogoAnimation ? { opacity: 0, scale: 0.5 } : { opacity: 1, scale: 1 }}
-                animate={logoRevealed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-              >
-                <motion.img
-                  src={logo}
-                  alt="Indoverse Labs"
-                  className="h-10 md:h-12 w-auto transition-transform duration-300 group-hover:scale-105"
-                  whileHover={{ rotate: [0, -5, 5, 0] }}
-                  transition={{ duration: 0.5 }}
-                />
-              </motion.div>
-              <motion.span 
-                initial={showLogoAnimation ? { opacity: 0 } : { opacity: 1 }}
-                animate={textRevealed ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="hidden sm:block text-lg md:text-xl font-display font-bold text-foreground overflow-hidden"
-              >
-                {displayedText}
-                {textRevealed && displayedText.length < brandName.length && (
-                  <motion.span
-                    className="inline-block w-[2px] h-[1em] bg-primary ml-0.5 align-middle"
-                    animate={{ opacity: [1, 0, 1] }}
-                    transition={{ duration: 0.5, repeat: Infinity }}
-                  />
-                )}
-              </motion.span>
+              <motion.img
+                src={logo}
+                alt="Indoverse Labs"
+                className="h-10 md:h-12 w-auto transition-transform duration-300 group-hover:scale-105"
+                whileHover={{ rotate: [0, -5, 5, 0] }}
+                transition={{ duration: 0.5 }}
+              />
+              <span className="hidden sm:block text-lg md:text-xl font-display font-bold text-foreground">
+                Indoverse Labs
+              </span>
             </button>
 
             {/* Desktop Navigation */}
