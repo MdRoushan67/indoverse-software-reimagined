@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import logo from '@/assets/indoverse-logo.png';
+import logo from '@/assets/indoverse-logo-animated.gif';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -68,7 +68,7 @@ const Navbar = () => {
               <motion.img
                 src={logo}
                 alt="Indoverse Labs"
-                className="h-10 md:h-12 w-auto transition-transform duration-300 group-hover:scale-105"
+                className="h-10 md:h-12 w-auto object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
                 whileHover={{ rotate: [0, -5, 5, 0] }}
                 transition={{ duration: 0.5 }}
               />
