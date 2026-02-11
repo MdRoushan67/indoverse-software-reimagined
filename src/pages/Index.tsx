@@ -18,7 +18,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-import logo from '@/assets/indoverse-logo.png';
+import animatedLogo from '@/assets/indoverse-logo-animated.gif';
 import aiNetwork from '@/assets/ai-network-bg.jpg';
 
 const Index = () => {
@@ -102,16 +102,21 @@ const Index = () => {
         <HeroVideoBackground />
         
         <div className="container mx-auto px-4 md:px-6 py-20 relative z-10">
-          <div className="max-w-5xl mx-auto text-center">
-            {/* Logo branding */}
-            <div className="flex justify-center mb-8">
-              <img 
-                src={logo} 
-                alt="Indoverse Labs" 
-                className="h-16 md:h-20 w-auto"
-              />
-            </div>
+          {/* Animated logo in top-right corner */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="absolute top-24 right-4 md:right-8 lg:right-12 z-20"
+          >
+            <img 
+              src={animatedLogo} 
+              alt="Indoverse Labs" 
+              className="h-20 md:h-28 lg:h-36 w-auto rounded-2xl"
+            />
+          </motion.div>
 
+          <div className="max-w-5xl mx-auto text-center">
             <div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium mb-8"
             >
