@@ -21,11 +21,7 @@ import { supabase } from '@/integrations/supabase/client';
 import logo from '@/assets/indoverse-logo.png';
 import aiNetwork from '@/assets/ai-network-bg.jpg';
 
-interface IndexProps {
-  introComplete?: boolean;
-}
-
-const Index = ({ introComplete = true }: IndexProps) => {
+const Index = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
