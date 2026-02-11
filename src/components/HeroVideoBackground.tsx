@@ -8,7 +8,7 @@ const HeroVideoBackground = ({ className = '' }: HeroVideoBackgroundProps) => {
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
       <video
-        className="absolute inset-0 w-full h-full object-contain bg-background"
+        className="absolute inset-0 w-full h-full object-cover"
         muted
         loop
         playsInline
